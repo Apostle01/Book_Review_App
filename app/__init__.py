@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+import os
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -9,7 +10,6 @@ login = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "your_secret_key")
 
     uri = os.environ.get("DATABASE_URL")
