@@ -7,33 +7,7 @@ from flask_login import LoginManager, login_user, logout_user, current_user, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.forms import LoginForm, RegistrationForm, BookForm, CommentForm
 from app.models import Users, Book, Comment
-
-# Initialize the database
-db = SQLAlchemy()
-migrate = Migrate()
-login_manager = LoginManager()
-
-def create_app():
-    app = Flask(__name__)
-
-    # Use environment variables for configuration
-    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "your_secret_key")
-
-    # Select the database based on development status
-    uri = os.environ.get("DATABASE_URL")
-    if uri and uri.startswith("postgres://"):
-        uri = uri.replace("postgres://", "postgresql://", 1)
-    app.config["SQLALCHEMY_DATABASE_URI"] = uri or "postgresql://postgres:Admin@localhost/postgres"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-    db.init_app(app)
-    migrate.init_app(app, db)
-    login_manager.init_app(app)
-
-    from app.routes import app_bp
-    app.register_blueprint(app_bp)
-
-    return app
+from app import create_app, db
 
 # Create the Flask app
 app = create_app()
@@ -47,7 +21,7 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
-@login_manager.user_loader
+@login_manager.user_loader # type: ignore
 def load_user(user_id):
     return Users.query.get(int(user_id))
 

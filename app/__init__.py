@@ -9,8 +9,14 @@ login = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'your-database-uri'
-    app.config['SECRET_KEY'] = 'your-secret-key'
+
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "your_secret_key")
+
+    uri = os.environ.get("DATABASE_URL")
+    if uri and uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    app.config["SQLALCHEMY_DATABASE_URI"] = uri or "postgresql://postgres:Admin@localhost/postgres"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     
     db.init_app(app)
     migrate.init_app(app, db)
