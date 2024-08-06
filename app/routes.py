@@ -7,7 +7,7 @@ from app import db, login_manager
 
 app_bp = Blueprint('app_bp', __name__)
 
-@app_bp.before_app_first_request
+@app_bp.before_app_request
 def create_tables():
     db.create_all()
 
