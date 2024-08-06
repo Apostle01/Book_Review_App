@@ -1,20 +1,25 @@
 book1-review-app/
+│
 ├── app/
-│   ├── __init__.py
-│   ├── models.py
-│   ├── forms.py
-│   └── routes.py
+│   ├── __init__.py             # Initialize Flask app and SQLAlchemy
+│   ├── main.py                 # Main entry point for the application
+│   ├── models.py               # Database models definitions
+│   ├── forms.py                # WTForms form classes
+│   ├── routes.py               # Application route definitions
+│
 ├── templates/
-│   ├── home.html
-│   ├── login.html
-│   ├── register.html
-│   ├── add_book.html
-│   ├── search.html
-│   ├── delete_book.html
-│   ├── confirm_delete.html
-│   ├── book_details.html
-│   └── 404.html
-├── config.py
-├── Procfile
-├── requirements.txt
-└── main.py
+│   ├── base.html               # Base template with common layout
+│   ├── home.html               # Homepage template
+│   ├── login.html              # Login page template
+│   ├── register.html           # Registration page template
+│   ├── add_book.html           # Add book form template
+│   ├── search.html             # Search results template
+│   ├── delete_book.html        # Delete book confirmation template
+│   ├── confirm_delete.html     # Confirm delete action template
+│   ├── book_details.html       # Book details page template
+│   └── 404.html                # 404 error page template
+│
+├── config.py                   # Configuration file for the application
+├── Procfile                    # Heroku process file
+├── requirements.txt            # Python dependencies list
+└── structure.txt               # This file describing the project structure
