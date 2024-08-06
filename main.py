@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.forms import LoginForm, RegistrationForm, BookForm, CommentForm
 from app.models import Users, Book, Comment
 from app import create_app, db
+from app import app
 
 # Create the Flask app
 app = create_app()
